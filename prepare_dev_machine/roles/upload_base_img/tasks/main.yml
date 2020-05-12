@@ -1,0 +1,20 @@
+# Upload a base VM image to the hypervisor
+
+# Expect the following variable:
+# path_to_file: the path to the VM image for uploading
+# cloud_img_dir: the destination directory to upload the VM image
+
+# Export the following fact:
+# base_img_name: The name of the base image on the hypervisor
+
+---
+
+- name: Upload the base VM image to the hypervisor
+  copy:
+    src: "{{ path_to_file }}"
+    dest: "{{ cloud_img_dir }}/baseimg.img"
+    owner: "{{ ansible_user_id }}"
+    group: "{{ ansible_user_id }}"
+
+- set_facts:
+    base_img_name: baseimg.img
