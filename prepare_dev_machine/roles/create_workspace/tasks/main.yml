@@ -1,29 +1,22 @@
-# Create a work space in the home directory.
-# The work space is located at $HOME/WorkSpace, and contains the following subdirectories:
-# $HOME/WorkSpace/CloudImg : Store the base VM image for launching new VMs.
-# $HOME/WorkSpace/VMImgs : Store the VM images for all the created VMs on this machine.
+# Create a work space in the home directory. 
 
-# export the following variables as host facts
-# work_space_dir: "{{ ansible_env.HOME }}/WorkSpace"
-# cloud_img_dir: "{{ ansible_env.HOME }}/WorkSpace/CloudImg"
-# vm_imgs_dir: "{{ ansible_env.HOME }}/WorkSpace/VMImgs"
+# Depend on the following facts provided by load_facts:
+# work_space_dir: The directory of the work space.
+# cloud_img_dir: A sub-directory of the work space for storing the base VM image.
+# vm_imgs_dir: A sub-directory of the work space for storing VM images.
 
+---
 - name: Create $HOME/WorkSpace
   file:
-    path: "{{ ansible_env.HOME }}/WorkSpace"
+    path: "{{ work_space_dir }}"
     state: directory
 
 - name: Create $HOME/CloudImg
   file:
-    path: "{{ ansible_env.HOME }}/WorkSpace/CloudImg"
+    path: "{{ cloud_img_dir }}"
     state: directory
 
 - name: Create $HOME/VMImgs
   file:
-    path: "{{ ansible_env.HOME }}/WorkSpace/VMImgs"
+    path: "{{ vm_imgs_dir }}"
     state: directory
-
-- set_fact:
-    work_space_dir: "{{ ansible_env.HOME }}/WorkSpace"
-    cloud_img_dir: "{{ ansible_env.HOME }}/WorkSpace/CloudImg"
-    vm_imgs_dir: "{{ ansible_env.HOME }}/WorkSpace/VMImgs"

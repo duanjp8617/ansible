@@ -4,6 +4,7 @@
   # gather_facts: no
 
   roles:
+  - load_facts
   - become_hypervisor
   - create_workspace
   

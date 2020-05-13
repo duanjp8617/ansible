@@ -2,7 +2,6 @@
 # On a machine with Ubuntu 18.04 OS, we need the following packages:
 # qemu-kvm, libvirt-bin, bridge-utils
 # For more information, checkout: https://help.ubuntu.com/community/KVM/Installation
-
 ---
 - name: Install necessary packages to become an hypervisor
   become: yes
