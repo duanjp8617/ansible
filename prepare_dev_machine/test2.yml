@@ -1,0 +1,13 @@
+---
+- hosts: djp02
+  remote_user: djp
+
+  # tasks:
+
+  # - debug:
+  #     var: inventory_hostname
+  
+  roles:
+  - role: load_facts
+  - role: define_network
+    become: yes

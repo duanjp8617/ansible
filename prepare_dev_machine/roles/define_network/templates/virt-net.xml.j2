@@ -1,0 +1,14 @@
+<network>
+  <name>{{ item.name }}</name>
+  <forward mode='{{ item.mode }}' dev='{{ item.bind_dev }}'/>
+  <bridge name='{{ item.bridge_name }}' stp='on' delay='0'/>
+  <mac address='{{ item.bridge_mac }}'/>
+  <ip address='{{ item.bridge_ip }}' netmask='{{ item.bridge_netmask }}'>
+    <dhcp>
+      <range start='{{ item.dhcp_start }}' end='{{ item.dhcp_stop }}'/>
+      {% for addr in item.addr_pool %}
+      <host mac='{{ addr.mac }}' ip='{{ addr.ip }}'/>
+      {% endfor %}
+    </dhcp>
+  </ip>
+</network>

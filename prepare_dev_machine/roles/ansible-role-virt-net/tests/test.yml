@@ -1,0 +1,21 @@
+---
+- vars:
+  - networks:
+    - name: test
+      bridge:
+        name: brtest
+        stp: on
+        delay: 0
+      #hwaddr: 52:54:00:f7:34:54
+      forward:
+        mode: nat
+      ipaddr: 192.168.150.1
+      netmask: 255.255.255.0
+      dhcp_range:
+        start: 192.168.150.2
+        end: 192.168.150.254
+
+- hosts: testhosts
+  remote_user: root
+  roles:
+    - libvirt-net
