@@ -1,5 +1,9 @@
 # Provide facts used by other roles.
 ---
+
+- include_vars: network_param.yml
+- include_vars: vm_param.yml
+
 - name: Set host facts used by other roles.  
   set_fact:
     # Host facts used by create_workspace
@@ -11,4 +15,7 @@
     base_img_name: baseimg.img
 
     # Parameters of the hypervisor network
-    networks: '{{ network_param.djp02 }}'
+    networks: "{{ lookup('vars', 'network_param_' + inventory_hostname) }}"
+
+    # Parameters of the VMs
+    vms: "{{ lookup('vars', 'vm_param_' + inventory_hostname) }}"

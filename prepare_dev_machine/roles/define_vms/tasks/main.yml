@@ -1,0 +1,14 @@
+---
+
+- name: Create VM images
+  copy: 
+    src: "{{ cloud_img_dir }}/{{ base_img_name }}"
+    dest: "{{ vm_imgs_dir }}/vm{{ item.network_idx }}.img"
+    remote_src: yes
+  with_items: '{{ vms }}'
+
+- name: Upload VM template file
+  template: 
+    src: vm.template.j2
+    dest: ~/vm.xml
+  with_items: '{{ vms }}'

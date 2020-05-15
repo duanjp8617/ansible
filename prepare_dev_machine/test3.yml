@@ -1,0 +1,11 @@
+---
+- hosts: djp02
+  remote_user: djp
+  
+  roles:
+  - role: load_facts
+  - role: define_vms
+
+  tasks:
+  - debug:
+      var: vms
