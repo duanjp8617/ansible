@@ -9,5 +9,5 @@
   
   roles:
   - role: load_facts
-  - role: define_network
+  - role: define_networks
     become: yes
