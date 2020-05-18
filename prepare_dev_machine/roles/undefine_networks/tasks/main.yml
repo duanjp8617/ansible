@@ -1,0 +1,25 @@
+---
+- name: Get list of active networks
+  virt_net:
+    command: list_nets
+    state: active
+  register: active_netlist
+
+- name: Deactivate if exists
+  virt_net:
+    command: destroy
+    name: "{{ item.name }}"
+  when: item.name in active_netlist.list_nets
+  with_items: '{{ networks }}'
+
+- name: Get list of networks
+  virt_net:
+    command: list_nets
+  register: netlist
+
+- name: Undefine if exists
+  virt_net:
+    command: undefine
+    name: "{{ item.name }}"
+  when: item.name in netlist.list_nets
+  with_items: '{{ networks }}'

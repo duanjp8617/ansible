@@ -1,0 +1,33 @@
+---
+- name: List running VMs
+  virt:
+    command: list_vms
+    state: running
+  register: active_list_vms
+
+- name: Destroy active VMs.
+  virt:
+    command: destroy
+    name: vm{{ item.network_idx }}
+  when: ("vm" + item.network_idx|string) in active_list_vms.list_vms
+  with_items: "{{ vms }}"
+
+- name: List shutdown VMs
+  virt:
+    command: list_vms
+    state: shutdown
+  register: shutdown_list_vms
+
+- name: Undefine VMs
+  virt:
+    command: undefine
+    name: vm{{ item.network_idx }}
+  when: ("vm" + item.network_idx|string) in shutdown_list_vms.list_vms
+  with_items: "{{ vms }}"
+
+- name: Remove VM images.
+  file:
+    path: "{{ vm_imgs_dir }}/vm{{ item.network_idx }}.img"
+    state: absent
+  when: ("vm" + item.network_idx|string) in shutdown_list_vms.list_vms
+  with_items: "{{ vms }}"

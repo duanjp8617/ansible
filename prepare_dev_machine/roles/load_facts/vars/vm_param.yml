@@ -3,3 +3,27 @@ vm_param_djp02:
 - mem: 1024
   cpus: 2
   network_idx: 0
+- mem: 1024
+  cpus: 2
+  network_idx: 1
+- mem: 1024
+  cpus: 2
+  network_idx: 2
+- mem: 1024
+  cpus: 2
+  network_idx: 3
+- mem: 1024
+  cpus: 2
+  network_idx: 4
+- mem: 1024
+  cpus: 2
+  network_idx: 5
+- mem: 1024
+  cpus: 2
+  network_idx: 6
+- mem: 1024
+  cpus: 2
+  network_idx: 7
+- mem: 1024
+  cpus: 2
+  network_idx: 8

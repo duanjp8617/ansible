@@ -15,20 +15,6 @@
 
 - fail: 
     msg: "network {{ item.name }} is present"
-  when: item.name in netlist.list_nets and undefine is not defined
-  with_items: '{{ networks }}'
-
-- name: Deactivate if exists
-  virt_net:
-    command: destroy
-    name: "{{ item.name }}"
-  when: item.name in netlist.list_nets
-  with_items: '{{ networks }}'
-
-- name: Undefine if exists
-  virt_net:
-    command: undefine
-    name: "{{ item.name }}"
   when: item.name in netlist.list_nets
   with_items: '{{ networks }}'
 
@@ -38,18 +24,15 @@
     name="{{ item.name }}"
     xml='{{ lookup("template", "../templates/virt-net.xml.j2") }}'
   with_items: '{{ networks }}'
-  when: undefine is not defined
 
 - name: Autostart it
   virt_net:
     name="{{ item.name }}"
     autostart='yes'
   with_items: '{{ networks }}'
-  when: undefine is not defined
 
 - name: Enable
   virt_net: 
     name={{ item.name }}
     state=active
   with_items: '{{ networks }}'
-  when: undefine is not defined

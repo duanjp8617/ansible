@@ -1,4 +1,13 @@
 ---
+- name: List existing VMs
+  virt:
+    command: list_vms
+  register: list_vms
+
+- fail: 
+    msg: "vm{{ item.network_idx }} is present"
+  when: ("vm" + item.network_idx|string) in list_vms.list_vms and (item.network_idx|int < networks|length) 
+  with_items: '{{ vms }}'
 
 - name: Create VM images
   copy: 
@@ -7,8 +16,15 @@
     remote_src: yes
   with_items: '{{ vms }}'
 
-- name: Upload VM template file
-  template: 
-    src: vm.template.j2
-    dest: ~/vm.xml
-  with_items: '{{ vms }}'
+- name: Define VMs.
+  virt:
+    command: define
+    name: vm{{ item.network_idx }}
+    xml: '{{ lookup("template", "../templates/vm.xml.j2") }}'
+  with_items: "{{ vms }}"
+
+- name: Start VMs
+  virt:
+    name: vm{{ item.network_idx }}
+    state: running
+  with_items: "{{ vms }}"
