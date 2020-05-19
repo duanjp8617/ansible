@@ -1,5 +1,5 @@
 ---
-- hosts: djp03
+- hosts: dellservers
   remote_user: djp
 
   roles:

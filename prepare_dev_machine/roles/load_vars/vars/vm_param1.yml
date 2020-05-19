@@ -1,0 +1,15 @@
+vars:
+djp01:
+- mem: 1024
+  cpus: 2
+  network_idx: 0
+
+djp02:
+- mem: 1024
+  cpus: 2
+  network_idx: 0
+
+djp03:
+- mem: 1024
+  cpus: 2
+  network_idx: 0

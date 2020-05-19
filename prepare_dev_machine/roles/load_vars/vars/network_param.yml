@@ -56,7 +56,7 @@ djp01:
     ip: 192.170.112.9
   - mac: '52:54:00:01:02:0A'
     ip: 192.170.112.10
-- name: rounte_network2
+- name: route_network2
   mode: route
   bind_dev: eno1
   bridge_name: virbr3
@@ -142,7 +142,7 @@ djp02:
     ip: 192.170.122.9
   - mac: '52:54:00:02:02:0A'
     ip: 192.170.122.10
-- name: rounte_network2
+- name: route_network2
   mode: route
   bind_dev: eno1
   bridge_name: virbr3
@@ -200,7 +200,7 @@ djp03:
     ip: 192.170.131.9
   - mac: '52:54:00:03:01:0A'
     ip: 192.170.131.10
-- name: route_networt1
+- name: route_network1
   mode: route
   bind_dev: eno1
   bridge_name: virbr2
@@ -228,7 +228,7 @@ djp03:
     ip: 192.170.132.9
   - mac: '52:54:00:03:02:0A'
     ip: 192.170.132.10
-- name: rounte_network2
+- name: route_network2
   mode: route
   bind_dev: eno1
   bridge_name: virbr3

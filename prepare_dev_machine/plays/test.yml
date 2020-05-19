@@ -1,0 +1,8 @@
+---
+- hosts: dellservers
+  remote_user: djp
+
+  roles:
+  - role: roles/become_hypervisor/config_ipv4_forward 
+    vars:
+      enable: 1

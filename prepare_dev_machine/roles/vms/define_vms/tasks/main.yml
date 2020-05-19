@@ -1,4 +1,15 @@
 ---
+- name: Get list of active networks
+  virt_net:
+    command: list_nets
+    state: active
+  register: active_netlist
+
+- fail: 
+    msg: "network {{ item.name }} is not present"
+  when: item.name not in active_netlist.list_nets
+  with_items: '{{ networks }}'
+
 - name: List existing VMs
   virt:
     command: list_vms
