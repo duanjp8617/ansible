@@ -1,4 +1,14 @@
 ---
+- name: List existing VMs
+  virt:
+    command: list_vms
+  register: list_vms
+
+- fail: 
+    msg: "vm{{ item.network_idx }} is present"
+  when: ("vm" + item.network_idx|string) in list_vms.list_vms
+  with_items: '{{ vms }}'
+
 - name: Get list of active networks
   virt_net:
     command: list_nets

@@ -1,0 +1,9 @@
+---
+- hosts: djp03
+  remote_user: djp
+
+  roles:
+  - role: roles/load_vars
+  - role: roles/vms/undefine_vms
+    vars:
+      vms: "{{ vm_param[inventory_hostname] }}"

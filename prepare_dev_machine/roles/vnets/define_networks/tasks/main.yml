@@ -13,26 +13,24 @@
     command: list_nets
   register: netlist
 
-- fail: 
-    msg: "network {{ item.name }} is present"
-  when: item.name in netlist.list_nets
-  with_items: '{{ networks }}'
-
 - name: Create the network
   virt_net:
     command=define
     name="{{ item.name }}"
     xml='{{ lookup("template", "../templates/virt-net.xml.j2") }}'
+  when: item.name not in netlist.list_nets
   with_items: '{{ networks }}'
 
 - name: Autostart it
   virt_net:
     name="{{ item.name }}"
     autostart='yes'
+  when: item.name not in netlist.list_nets
   with_items: '{{ networks }}'
 
 - name: Enable
   virt_net: 
     name={{ item.name }}
     state=active
+  when: item.name not in netlist.list_nets
   with_items: '{{ networks }}'

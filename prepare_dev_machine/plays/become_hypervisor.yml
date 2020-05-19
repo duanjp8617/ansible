@@ -1,0 +1,11 @@
+---
+- hosts: dellservers
+  remote_user: djp
+
+  roles:
+  - role: roles/load_vars
+  - role: roles/become_hypervisor/install_pkg
+  - role: roles/become_hypervisor/create_workspace
+  - role: roles/become_hypervisor/upload_base_img 
+    vars:
+      path_to_file:  ~/WorkSpace/CloudImgs/cloud-vm.img

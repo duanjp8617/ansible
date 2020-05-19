@@ -1,0 +1,9 @@
+---
+- hosts: djp03
+  remote_user: djp
+
+  roles:
+  - role: roles/load_vars
+  - role: roles/vnets/define_networks
+    vars:
+      networks: "{{ network_param[inventory_hostname] }}"
