@@ -1,5 +1,5 @@
 ---
-- hosts: djp02 djp03
+- hosts: dellservers
   remote_user: djp
 
   roles:
@@ -7,3 +7,6 @@
   - role: roles/vxlan/create
     vars:
       vxlan: "{{ vxlan_param[inventory_hostname][0] }}"
+  - role: roles/vxlan/create
+    vars: 
+      vxlan: "{{ vxlan_param[inventory_hostname][1] }}"

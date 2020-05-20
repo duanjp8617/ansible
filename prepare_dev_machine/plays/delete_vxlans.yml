@@ -1,0 +1,13 @@
+---
+- hosts: dellservers
+  remote_user: djp
+
+  roles:
+  - role: roles/load_vars
+  - role: roles/vxlan/delete
+    vars:
+      vxlan: "{{ vxlan_param[inventory_hostname][0] }}"
+  - role: roles/vxlan/delete
+    vars: 
+      vxlan: "{{ vxlan_param[inventory_hostname][1] }}"
+      vms: "{{ vm_param[inventory_hostname] }}"

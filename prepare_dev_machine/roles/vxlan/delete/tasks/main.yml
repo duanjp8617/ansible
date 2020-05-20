@@ -1,20 +1,42 @@
 ---
-- name: Create vxlan interfaces on slaves.
+- name: Show bridge interface.
   become: yes
-  command: "ip link add vxlan{{ item.id }} type vxlan id {{ item.id }} dstport 4789 remote {{ master_ip }} local {{ item.ip }}"
-  when: item.ip|string == ansible_default_ipv4.address|string
-  with_items: '{{ slaves }}'
+  command: "ip link show {{ vxlan.bridge_name }}"
+  ignore_errors: yes
+  register: show_bridge_interface
 
-- name: Create a bridge.
-  become: yes
-  command: "ip link add name {{ bridge_name }} type bridge"
+- fail: 
+    msg: "bridge interface {{ vxlan.bridge_name }} is not present"
+  when: show_bridge_interface.rc|int != 0
 
-- name: Up the bridge
+- name: Show vxlan interfaces.
   become: yes
-  command: "ip link set dev {{ bridge_name }} up"
+  command: "ip link show vxlan{{ item.id }}"
+  ignore_errors: yes
+  register: show_vxlan_interfaces
+  with_items: "{{ vxlan.remotes }}"
 
-- name: Attach vxlan interfaces to the bridge
+- fail: 
+    msg: "vxlan interface vxlan{{ item.item.id }} is not present"
+  when: item.rc|int != 0
+  with_items: "{{ show_vxlan_interfaces.results }}"
+
+- name: List existing VMs
+  virt:
+    command: list_vms
+  register: list_vms
+
+- fail: 
+    msg: "vm{{ item.network_idx }} is present"
+  when: ("vm" + item.network_idx|string) in list_vms.list_vms
+  with_items: '{{ vms }}'
+
+- name: Delete vxlan interfaces.
   become: yes
-  command: "ip link set dev vxlan{{ item.id }} master {{ bridge_name }}"
-  when: item.ip|string == ansible_default_ipv4.address|string
-  with_items: "{{ slaves }}"
+  command: "ip link delete vxlan{{ item.id }}"
+  with_items: '{{ vxlan.remotes }}'
+
+- name: Delete bridge interface.
+  become: yes
+  command: "ip link delete {{ vxlan.bridge_name }}"
+
