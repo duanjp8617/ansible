@@ -1,0 +1,20 @@
+---
+- name: Create vxlan interfaces on slaves.
+  become: yes
+  command: "ip link add vxlan{{ item.id }} type vxlan id {{ item.id }} dstport 4789 remote {{ master_ip }} local {{ item.ip }}"
+  when: item.ip|string == ansible_default_ipv4.address|string
+  with_items: '{{ slaves }}'
+
+- name: Create a bridge.
+  become: yes
+  command: "ip link add name {{ bridge_name }} type bridge"
+
+- name: Up the bridge
+  become: yes
+  command: "ip link set dev {{ bridge_name }} up"
+
+- name: Attach vxlan interfaces to the bridge
+  become: yes
+  command: "ip link set dev vxlan{{ item.id }} master {{ bridge_name }}"
+  when: item.ip|string == ansible_default_ipv4.address|string
+  with_items: "{{ slaves }}"

@@ -1,0 +1,9 @@
+---
+- hosts: djp02 djp03
+  remote_user: djp
+
+  roles:
+  - role: roles/load_vars
+  - role: roles/vxlan/create
+    vars:
+      vxlan: "{{ vxlan_param[inventory_hostname][0] }}"

@@ -1,0 +1,60 @@
+vars:
+djp01:
+- local: 192.168.67.75
+  remotes:
+  - ip: 192.168.67.76
+    id: 112
+  - ip: 192.168.67.77
+    id: 113
+  bridge_name: br1
+  bridge_ip: 192.171.1.1
+  netmask: 255.255.0.0
+- local: 192.168.67.75
+  remotes:
+  - ip: 192.168.67.76
+    id: 212
+  - ip: 192.168.67.77
+    id: 213
+  bridge_name: br2
+  bridge_ip: 192.172.1.1
+  netmask: 255.255.0.0
+
+djp02:
+- local: 192.168.67.76
+  remotes:
+  - ip: 192.168.67.75
+    id: 112
+  - ip: 192.168.67.77
+    id: 123
+  bridge_name: br1
+  bridge_ip: 192.171.2.1
+  netmask: 255.255.0.0
+- local: 192.168.67.76
+  remotes:
+  - ip: 192.168.67.75
+    id: 212
+  - ip: 192.168.67.77
+    id: 223
+  bridge_name: br2
+  bridge_ip: 192.172.2.1
+  netmask: 255.255.0.0
+
+djp03:
+- local: 192.168.67.77
+  remotes:
+  - ip: 192.168.67.75
+    id: 113
+  - ip: 192.168.67.76
+    id: 123
+  bridge_name: br1
+  bridge_ip: 192.171.3.1
+  netmask: 255.255.0.0
+- local: 192.168.67.77
+  remotes:
+  - ip: 192.168.67.75
+    id: 213
+  - ip: 192.168.67.76
+    id: 223
+  bridge_name: br2
+  bridge_ip: 192.172.3.1
+  netmask: 255.255.0.0

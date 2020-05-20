@@ -1,0 +1,42 @@
+vars:
+djp01:
+- name: route_network1
+  mode: route
+  bind_dev: eno1
+  bridge_name: virbr2
+  bridge_mac: '52:54:00:02:01:01'
+  bridge_ip: 192.2.1.1
+  bridge_netmask: 255.255.0.0
+  dhcp_start: 192.2.1.2
+  dhcp_stop: 192.2.1.254
+  addr_pool:
+  - mac: '52:54:00:02:01:02'
+    ip: 192.2.1.2
+
+djp02:
+- name: route_network1
+  mode: route
+  bind_dev: eno1
+  bridge_name: virbr2
+  bridge_mac: '52:54:00:02:02:01'
+  bridge_ip: 192.2.2.1
+  bridge_netmask: 255.255.0.0
+  dhcp_start: 192.2.2.2
+  dhcp_stop: 192.2.2.254
+  addr_pool:
+  - mac: '52:54:00:02:02:02'
+    ip: 192.2.2.2
+
+djp03:
+- name: route_network1
+  mode: route
+  bind_dev: eno1
+  bridge_name: virbr2
+  bridge_mac: '52:54:00:02:03:01'
+  bridge_ip: 192.2.3.1
+  bridge_netmask: 255.255.255.0
+  dhcp_start: 192.2.3.2
+  dhcp_stop: 192.2.3.254
+  addr_pool:
+  - mac: '52:54:00:02:03:02'
+    ip: 192.2.3.2

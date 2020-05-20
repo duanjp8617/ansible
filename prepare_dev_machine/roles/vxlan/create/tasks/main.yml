@@ -1,0 +1,49 @@
+---
+- name: Show bridge interface.
+  become: yes
+  command: "ip link show {{ vxlan.bridge_name }}"
+  ignore_errors: yes
+  register: show_bridge_interface
+
+- fail: 
+    msg: "bridge interface {{ vxlan.bridge_name }} is present"
+  when: show_bridge_interface.rc|int == 0
+
+- name: Show vxlan interfaces.
+  become: yes
+  command: "ip link show vxlan{{ item.id }}"
+  ignore_errors: yes
+  register: show_vxlan_interfaces
+  with_items: "{{ vxlan.remotes }}"
+
+- fail: 
+    msg: "vxlan interface vxlan{{ item.item.id }} is present"
+  when: item.rc|int == 0
+  with_items: "{{ show_vxlan_interfaces.results }}"
+
+- name: Create bridge interface.
+  become: yes
+  command: "ip link add name {{ vxlan.bridge_name }} type bridge"
+
+- name: Up the bridge
+  become: yes
+  command: "ip link set dev {{ vxlan.bridge_name }} up"
+
+- name: Assign IP address to the bridge interface.
+  become: yes
+  command: "ip a add {{ vxlan.bridge_ip }}/{{ vxlan.netmask }} dev {{ vxlan.bridge_name }}"
+
+- name: Create vxlan interfaces.
+  become: yes
+  command: "ip link add vxlan{{ item.id }} type vxlan id {{ item.id }} dstport 4789 remote {{ item.ip }} local {{ vxlan.local }}"
+  with_items: '{{ vxlan.remotes }}'
+
+- name: Attach vxlan interfaces to the bridge interface
+  become: yes
+  command: "ip link set dev vxlan{{ item.id }} master {{ vxlan.bridge_name }}"
+  with_items: "{{ vxlan.remotes }}"
+
+- name: Up the vxlan interfaces.
+  become: yes
+  command: "ip link set dev vxlan{{ item.id }} up"
+  with_items: "{{ vxlan.remotes }}"
