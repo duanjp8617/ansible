@@ -1,6 +1,14 @@
 ---
+- name: List VMs
+  virt:
+    command: list_vms
+  register: list_vms
+
+- fail: 
+    msg: "There are remaining VMs in the system"
+  when: list_vms.list_vms|int > 0
+
 - name: Show bridge interface.
-  become: yes
   command: "ip link show {{ vxlan.bridge_name }}"
   ignore_errors: yes
   register: show_bridge_interface
@@ -10,7 +18,6 @@
   when: show_bridge_interface.rc|int != 0
 
 - name: Show vxlan interfaces.
-  become: yes
   command: "ip link show vxlan{{ item.id }}"
   ignore_errors: yes
   register: show_vxlan_interfaces
@@ -20,16 +27,6 @@
     msg: "vxlan interface vxlan{{ item.item.id }} is not present"
   when: item.rc|int != 0
   with_items: "{{ show_vxlan_interfaces.results }}"
-
-- name: List existing VMs
-  virt:
-    command: list_vms
-  register: list_vms
-
-- fail: 
-    msg: "vm{{ item.network_idx }} is present"
-  when: ("vm" + item.network_idx|string) in list_vms.list_vms
-  with_items: '{{ vms }}'
 
 - name: Delete vxlan interfaces.
   become: yes

@@ -1,6 +1,5 @@
 ---
 - name: Show bridge interface.
-  become: yes
   command: "ip link show {{ vxlan.bridge_name }}"
   ignore_errors: yes
   register: show_bridge_interface
@@ -10,7 +9,6 @@
   when: show_bridge_interface.rc|int == 0
 
 - name: Show vxlan interfaces.
-  become: yes
   command: "ip link show vxlan{{ item.id }}"
   ignore_errors: yes
   register: show_vxlan_interfaces

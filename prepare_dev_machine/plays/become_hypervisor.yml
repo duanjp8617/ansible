@@ -9,3 +9,4 @@
   - role: roles/become_hypervisor/upload_base_img 
     vars:
       path_to_file:  ~/WorkSpace/CloudImgs/cloud-vm.img
+  - role: roles/become_hypervisor/stop_default_network

@@ -1,0 +1,12 @@
+---
+- name: Get list of active networks
+  virt_net:
+    command: list_nets
+    state: active
+  register: active_netlist
+
+- name: Deactivate libvirt's default network
+  virt_net:
+    command: destroy
+    name: "default"
+  when: ("default") in active_netlist.list_nets

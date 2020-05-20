@@ -54,12 +54,18 @@
     <controller type='virtio-serial' index='0'>
       <address type='pci' domain='0x0000' bus='0x00' slot='0x06' function='0x0'/>
     </controller>
-    {% for network in networks %}
     <interface type='network'>
-      <mac address='{{ network.addr_pool[item.network_idx].mac }}'/>
-      <source network='{{ network.name }}'/>
+      <mac address='{{ networks.nat_network.addr_pool[item.network_idx].mac }}'/>
+      <source network='{{ networks.nat_network.name }}'/>
       <model type='virtio'/>
-      <address type='pci' domain='0x0000' bus='0x00' slot='0x{{ "%0x" | format( loop.index + 9 | int ) }}' function='0x0'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x{{ "%0x" | format( 10 | int ) }}' function='0x0'/>
+    </interface>
+    {% for network in networks.bridge_networks %}
+    <interface type='bridge'>
+      <mac address='{{ network.addr_pool[item.network_idx].mac }}'/>
+      <source bridge='{{ network.bridge_name }}'/>
+      <model type='virtio'/>
+      <address type='pci' domain='0x0000' bus='0x00' slot='0x{{ "%0x" | format( loop.index + 10 | int ) }}' function='0x0'/>
     </interface>
     {% endfor %}
     <serial type='pty'>

@@ -1,6 +1,6 @@
 <network>
   <name>{{ item.name }}</name>
-  <forward mode='{{ item.mode }}' dev='{{ item.bind_dev }}'/>
+  <forward mode='{{ item.mode }}' />
   <bridge name='{{ item.bridge_name }}' stp='on' delay='0'/>
   <mac address='{{ item.bridge_mac }}'/>
   <ip address='{{ item.bridge_ip }}' netmask='{{ item.bridge_netmask }}'>

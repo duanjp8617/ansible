@@ -19,18 +19,21 @@
     name="{{ item.name }}"
     xml='{{ lookup("template", "../templates/virt-net.xml.j2") }}'
   when: item.name not in netlist.list_nets
-  with_items: '{{ networks }}'
+  vars:
+    item: "{{ networks.nat_network }}"
 
 - name: Autostart it
   virt_net:
     name="{{ item.name }}"
     autostart='yes'
   when: item.name not in netlist.list_nets
-  with_items: '{{ networks }}'
+  vars:
+    item: "{{ networks.nat_network }}"
 
 - name: Enable
   virt_net: 
     name={{ item.name }}
     state=active
   when: item.name not in netlist.list_nets
-  with_items: '{{ networks }}'
+  vars:
+    item: "{{ networks.nat_network }}"

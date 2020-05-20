@@ -1,14 +1,14 @@
 ---
-- name: Get list of active networks
-  virt_net:
-    command: list_nets
-    state: active
-  register: active_netlist
+# - name: Get list of active networks
+#   virt_net:
+#     command: list_nets
+#     state: active
+#   register: active_netlist
 
-- fail: 
-    msg: "network {{ item.name }} is not present"
-  when: item.name not in active_netlist.list_nets
-  with_items: '{{ networks }}'
+# - fail: 
+#     msg: "network {{ item.name }} is not present"
+#   when: item.name not in active_netlist.list_nets
+#   with_items: '{{ networks }}'
 
 - name: List existing VMs
   virt:
@@ -20,7 +20,7 @@
     src: "{{ cloud_img_dir }}/{{ base_img_name }}"
     dest: "{{ vm_imgs_dir }}/vm{{ item.network_idx }}.img"
     remote_src: yes
-  when: (("vm" + item.network_idx|string) not in list_vms.list_vms) and (item.network_idx|int < networks[0].addr_pool|length)
+  when: (("vm" + item.network_idx|string) not in list_vms.list_vms)
   with_items: '{{ vms }}'
 
 - name: Define VMs.

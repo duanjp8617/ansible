@@ -1,13 +1,12 @@
 ---
-- name: List existing VMs
+- name: List VMs
   virt:
     command: list_vms
   register: list_vms
 
 - fail: 
-    msg: "vm{{ item.network_idx }} is present"
-  when: ("vm" + item.network_idx|string) in list_vms.list_vms
-  with_items: '{{ vms }}'
+    msg: "There are remaining VMs in the system"
+  when: list_vms.list_vms|int > 0
 
 - name: Get list of active networks
   virt_net:
@@ -20,7 +19,8 @@
     command: destroy
     name: "{{ item.name }}"
   when: item.name in active_netlist.list_nets
-  with_items: '{{ networks }}'
+  vars:
+    item: "{{ networks.nat_network }}"
 
 - name: Get list of networks
   virt_net:
@@ -32,4 +32,5 @@
     command: undefine
     name: "{{ item.name }}"
   when: item.name in netlist.list_nets
-  with_items: '{{ networks }}'
+  vars:
+    item: "{{ networks.nat_network }}"
