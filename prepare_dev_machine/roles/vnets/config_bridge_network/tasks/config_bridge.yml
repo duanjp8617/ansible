@@ -1,0 +1,17 @@
+---
+- hosts: vms
+  
+  tasks:
+  - include_vars: 
+      file: ./vars.yml
+      name: vm_networks
+
+  - name: Bring up the bridge network interfaces.
+    become: yes
+    command: "ip link set dev {{ item.dev }} up"
+    with_items: "{{ vm_networks[inventory_hostname] }}"
+
+  - name: Assign IP addresses.
+    become: yes
+    command: "ip a add {{ item.ip }}/{{ item.netmask }} dev {{ item.dev }}"
+    with_items: "{{ vm_networks[inventory_hostname] }}"

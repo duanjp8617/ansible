@@ -12,3 +12,5 @@
     - bridge-utils
     - python3-lxml
     - python3-libvirt
+    - ansible
+    - sshpass

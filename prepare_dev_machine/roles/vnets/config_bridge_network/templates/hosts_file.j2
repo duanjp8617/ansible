@@ -1,0 +1,8 @@
+[vms]
+{% for vm in vms %}
+{{ (networks.nat_network.addr_pool[vm.network_idx].ip)|string }}
+{% endfor %}
+
+[vms:vars]
+ansible_user=ubuntu
+ansible_password=ubuntu

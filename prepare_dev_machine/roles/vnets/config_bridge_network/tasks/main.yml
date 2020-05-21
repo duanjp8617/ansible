@@ -1,0 +1,15 @@
+---
+- name: Upload template1
+  template:
+    src: hosts_file.j2
+    dest: "{{ work_space_dir }}/ansible/hosts"
+
+- name: Upload template2
+  template:
+    src: vars_file.j2
+    dest: "{{ work_space_dir }}/ansible/vars.yml"
+
+- name: Copy playbook
+  copy:
+    src: tasks/config_bridge.yml
+    dest: "{{ work_space_dir }}/ansible/config_bridge.yml"

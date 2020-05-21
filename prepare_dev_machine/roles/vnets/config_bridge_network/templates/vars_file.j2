@@ -1,0 +1,9 @@
+vars:
+{% for vm in vms %}
+{{ (networks.nat_network.addr_pool[vm.network_idx].ip)|string }}:
+{% for bridge_network in networks.bridge_networks %}
+- dev: ens{{ loop.index + 10 | int }}
+  ip: {{ bridge_network.addr_pool[vm.network_idx].ip|string }}
+  netmask: {{ bridge_network.netmask|string }}
+{% endfor %}
+{% endfor %}
