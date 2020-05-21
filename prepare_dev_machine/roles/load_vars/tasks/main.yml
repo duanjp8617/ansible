@@ -3,10 +3,13 @@
 # This role should be loaded before using other roles
 
 ---
-- include_vars: workspace_param.yml
-- include_vars: 
+- name: Include workspace parameters.
+  include_vars: workspace_param.yml
+- name: Include network parameters.
+  include_vars: 
     file: network_param.yml
     name: network_param
-- include_vars: 
+- name: Include VM parameters.
+  include_vars: 
     file: vm_param1.yml
     name: vm_param

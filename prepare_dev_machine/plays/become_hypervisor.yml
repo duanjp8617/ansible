@@ -1,3 +1,5 @@
+# Turn the target machine into a hypervisor for running VMs.
+
 ---
 - hosts: dellservers
   remote_user: djp

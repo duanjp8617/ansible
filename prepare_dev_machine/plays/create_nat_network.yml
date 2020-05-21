@@ -1,3 +1,5 @@
+# Create a nat network on each target machine.
+
 ---
 - hosts: dellservers
   remote_user: djp

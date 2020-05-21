@@ -1,3 +1,5 @@
+# Create the VMs on each target machine.
+
 ---
 - hosts: dellservers
   remote_user: djp

@@ -1,3 +1,5 @@
+# Delete the VMs from the target machine.
+
 ---
 - hosts: dellservers
   remote_user: djp

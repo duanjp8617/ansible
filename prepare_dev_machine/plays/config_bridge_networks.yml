@@ -1,3 +1,5 @@
+# Configure the bridge interface on each VMs.
+
 ---
 - hosts: dellservers
 

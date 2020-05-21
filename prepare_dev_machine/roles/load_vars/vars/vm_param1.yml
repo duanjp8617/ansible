@@ -2,7 +2,7 @@
 
 # Different hosts are indexed by "inventory_hostname"
 
-# Specify the size of memory (in MB), number of CPU cores and network index used the VM.
+# Specify the size of memory (in MB), number of CPU cores and network index used by a VM.
 
 # The network index should not exceed the size of the addr_pool of the network parameters.
 
@@ -11,13 +11,35 @@ djp01:
 - mem: 1024
   cpus: 2
   network_idx: 0
+- mem: 1024
+  cpus: 2
+  network_idx: 1
+- mem: 1024
+  cpus: 2
+  network_idx: 2
+
+
 
 djp02:
 - mem: 1024
   cpus: 2
   network_idx: 0
+- mem: 1024
+  cpus: 2
+  network_idx: 1
+- mem: 1024
+  cpus: 2
+  network_idx: 2
+
 
 djp03:
 - mem: 1024
   cpus: 2
   network_idx: 0
+- mem: 1024
+  cpus: 2
+  network_idx: 1
+- mem: 1024
+  cpus: 2
+  network_idx: 2
+

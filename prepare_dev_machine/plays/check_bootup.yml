@@ -1,3 +1,8 @@
+# Check whether the VMs have successfully booted up by pinging to the VMs.
+
+# Note: Please add "host_key_checking = False" to /etc/ansible/ansible.cfg for
+#       each target machine. Otherwise the remote login may fail.
+
 ---
 - hosts: dellservers
 
