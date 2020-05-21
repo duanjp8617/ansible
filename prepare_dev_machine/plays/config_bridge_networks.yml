@@ -14,6 +14,7 @@
       vms: "{{ vm_param[inventory_hostname] }}"
 
 - hosts: djp01
+  become: yes
   vars:
     bport: bport
     hport: hport
@@ -23,21 +24,16 @@
 
   tasks:
   - name: Set up a veth pair.
-    become: yes
     command: "ip link add {{ bport }} type veth peer name {{ hport }}"
 
   - name: Attach the bport to br0.
-    become: yes
     command: "ip link set dev {{ bport }} master {{ br }}"
 
   - name: Assign IP address to hport
-    become: yes
     command: "ip a add {{ hport_ip }}/{{ hport_netmask }} dev {{ hport }}"
 
   - name: Up hport.
-    become: yes
     command: "ip link set dev {{ hport }} up"
   
   - name: Up bport.
-    become: yes
     command: "ip link set dev {{ bport }} up"

@@ -10,3 +10,18 @@
     vars:
       networks: "{{ network_param[inventory_hostname] }}"
       vms: "{{ vm_param[inventory_hostname] }}"
+
+- hosts: djp01
+  become: yes
+  vars:
+    bport: bport
+
+  tasks:
+  - name: Show bport interface.
+    command: "ip link show {{ bport }}"
+    ignore_errors: yes
+    register: show_bport
+
+  - name: Delete bport.
+    command: "ip link delete {{ bport }}"
+    when: show_bport.rc|int == 0
