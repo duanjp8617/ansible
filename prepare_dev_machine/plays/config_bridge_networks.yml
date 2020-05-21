@@ -1,10 +1,9 @@
 ---
 - hosts: dellservers
-  remote_user: djp
 
   roles:
   - role: roles/load_vars
-  - role: roles/vnets/undefine_networks
+  - role: roles/networks/config_bridge_networks
     vars:
       networks: "{{ network_param[inventory_hostname] }}"
       vms: "{{ vm_param[inventory_hostname] }}"

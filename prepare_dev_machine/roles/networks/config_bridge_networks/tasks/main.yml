@@ -15,6 +15,6 @@
     dest: "{{ work_space_dir }}/ansible/config_bridge.yml"
 
 - name: Call ansible to do the configuration
-  command: "ansible-playbook -i {{ work_space_dir }}/ansible/hosts {{ work_space_dir }}/ansible/config_bridge.yml --extra-var "ansible_become_pass={{ pwd }}"
+  command: "ansible-playbook -i {{ work_space_dir }}/ansible/hosts {{ work_space_dir }}/ansible/config_bridge.yml --extra-var ansible_become_pass={{ pwd }}"
   vars:
     pwd: ubuntu
