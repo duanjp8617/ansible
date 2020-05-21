@@ -1,4 +1,0 @@
----
-- name: Enable IPv4 Forward.
-  become: yes
-  command: "sysctl -w net.ipv4.ip_forward={{ enable }}"

@@ -1,3 +1,5 @@
+# The directory structure of the workspace.
+
 vars:
 # Host facts used by create_workspace
 work_space_dir: "{{ ansible_env.HOME }}/WorkSpace"

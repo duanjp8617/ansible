@@ -1,9 +1,6 @@
 # Create a work space in the home directory. 
 
-# Depend on the following facts provided by load_facts:
-# work_space_dir: The directory of the work space.
-# cloud_img_dir: A sub-directory of the work space for storing the base VM image.
-# vm_imgs_dir: A sub-directory of the work space for storing VM images.
+# Before using this role, please load the variables specified in load_vars/vars/workspace_param.yml.
 
 ---
 - name: Create $HOME/WorkSpace

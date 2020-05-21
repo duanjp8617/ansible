@@ -1,20 +1,20 @@
 ---
-- name: Upload template1
+- name: Upload VM hosts file to the target machine.
   template:
     src: hosts_file.j2
     dest: "{{ work_space_dir }}/ansible/hosts"
 
-- name: Upload template2
+- name: Upload VM-related variables to the target machine.
   template:
     src: vars_file.j2
     dest: "{{ work_space_dir }}/ansible/vars.yml"
 
-- name: Copy playbook
+- name: Copy playbook for configuring the bridge networks on the VMs.
   copy:
     src: tasks/config_bridge.yml
     dest: "{{ work_space_dir }}/ansible/config_bridge.yml"
 
-- name: Call ansible to do the configuration
+- name: Call ansible on the target machine to configure the VMs
   command: "ansible-playbook -i {{ work_space_dir }}/ansible/hosts {{ work_space_dir }}/ansible/config_bridge.yml --extra-var ansible_become_pass={{ pwd }}"
   vars:
     pwd: ubuntu

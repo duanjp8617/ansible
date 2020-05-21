@@ -1,13 +1,13 @@
 ---
-- name: Upload template1
+- name: Upload VM hosts file to the target machine.
   template:
     src: hosts_file.j2
     dest: "{{ work_space_dir }}/ansible/hosts"
 
-- name: Copy playbook
+- name: Upload the playbook for checking the bootup status of VMs to the target machine.
   copy:
     src: tasks/check.yml
     dest: "{{ work_space_dir }}/ansible/check.yml"
 
-- name: Check whether VMs boot up
+- name: Check whether VMs boot up.
   command: "ansible-playbook -i {{ work_space_dir }}/ansible/hosts {{ work_space_dir }}/ansible/check.yml"

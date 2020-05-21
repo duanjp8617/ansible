@@ -8,12 +8,12 @@
 #           otherwise, the networks will be created on the hypervisor.
 
 ---
-- name: Get list of defined networks
+- name: Get the list of libvirt networks on the target machine.
   virt_net:
     command: list_nets
   register: netlist
 
-- name: Create the network
+- name: Create the nat network.
   virt_net:
     command=define
     name="{{ item.name }}"
@@ -22,7 +22,7 @@
   vars:
     item: "{{ networks.nat_network }}"
 
-- name: Autostart it
+- name: Autostart the nat network.
   virt_net:
     name="{{ item.name }}"
     autostart='yes'
@@ -30,7 +30,7 @@
   vars:
     item: "{{ networks.nat_network }}"
 
-- name: Enable
+- name: Enable the nat network.
   virt_net: 
     name={{ item.name }}
     state=active

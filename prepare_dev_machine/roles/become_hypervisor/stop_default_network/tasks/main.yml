@@ -1,3 +1,5 @@
+# Deactivate the default network of libvirt.
+
 ---
 - name: Get list of active networks
   virt_net:

@@ -1,3 +1,11 @@
+# VM parameters for initializing a small VM clutser.
+
+# Different hosts are indexed by "inventory_hostname"
+
+# Specify the size of memory (in MB), number of CPU cores and network index used the VM.
+
+# The network index should not exceed the size of the addr_pool of the network parameters.
+
 vars:
 djp01:
 - mem: 1024

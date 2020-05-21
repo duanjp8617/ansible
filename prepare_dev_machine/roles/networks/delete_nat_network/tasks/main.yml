@@ -1,20 +1,21 @@
 ---
-- name: List VMs
+- name: Get the list of VMs on the target machine.
   virt:
     command: list_vms
   register: list_vms
 
-- fail: 
+- name: Fail the play if there are remaining VMs.
+  fail: 
     msg: "There are remaining VMs in the system"
   when: list_vms.list_vms|int > 0
 
-- name: Get list of active networks
+- name: Get the list of libvirt networks on the target machine.
   virt_net:
     command: list_nets
     state: active
   register: active_netlist
 
-- name: Deactivate if exists
+- name: Deactivate the nat network.
   virt_net:
     command: destroy
     name: "{{ item.name }}"
@@ -22,12 +23,12 @@
   vars:
     item: "{{ networks.nat_network }}"
 
-- name: Get list of networks
+- name: Get the list of libvirt networks on the target machine.
   virt_net:
     command: list_nets
   register: netlist
 
-- name: Undefine if exists
+- name: Undefine the nat network.
   virt_net:
     command: undefine
     name: "{{ item.name }}"
