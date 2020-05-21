@@ -25,11 +25,8 @@
 - name: Find all VM images
   find:
     paths: "{{ vm_imgs_dir }}"
-    patterns: *.img
+    patterns: "*.img"
   register: images_to_delete
-
-- debug:
-    var: images_to_delete
 
 - name: Remove VM images.
   file:

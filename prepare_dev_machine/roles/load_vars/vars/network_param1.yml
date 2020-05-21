@@ -3,7 +3,7 @@ djp01:
   nat_network:
     name: nat_network
     mode: nat
-    bridge_name: br0
+    bridge_name: nat_br
     bridge_mac: '52:54:00:00:01:01'
     bridge_ip: 192.170.1.1
     bridge_netmask: 255.255.255.0
@@ -29,7 +29,7 @@ djp01:
     - mac: '52:54:00:00:01:0A'
       ip: 192.170.1.10
   bridge_networks:
-  - bridge_name: br1
+  - bridge_name: br0
     netmask: 255.255.0.0
     addr_pool:
     - mac: '52:54:00:01:01:02'
@@ -50,7 +50,7 @@ djp01:
       ip: 192.171.1.9
     - mac: '52:54:00:01:01:0A'
       ip: 192.171.1.10
-  - bridge_name: br2
+  - bridge_name: br0
     netmask: 255.255.0.0
     addr_pool:
     - mac: '52:54:00:02:01:02'
@@ -76,7 +76,7 @@ djp02:
   nat_network:
     name: nat_network
     mode: nat
-    bridge_name: br0
+    bridge_name: nat_br
     bridge_mac: '52:54:00:00:02:01'
     bridge_ip: 192.170.2.1
     bridge_netmask: 255.255.255.0
@@ -102,7 +102,7 @@ djp02:
     - mac: '52:54:00:00:02:0A'
       ip: 192.170.2.10
   bridge_networks:
-  - bridge_name: br1
+  - bridge_name: br0
     netmask: 255.255.0.0
     addr_pool:
     - mac: '52:54:00:01:02:02'
@@ -123,7 +123,7 @@ djp02:
       ip: 192.171.2.9
     - mac: '52:54:00:01:02:0A'
       ip: 192.171.2.10
-  - bridge_name: br2
+  - bridge_name: br0
     netmask: 255.255.0.0
     addr_pool:
     - mac: '52:54:00:02:02:02'
@@ -149,7 +149,7 @@ djp03:
   nat_network:
     name: nat_network
     mode: nat
-    bridge_name: br0
+    bridge_name: nat_br
     bridge_mac: '52:54:00:00:03:01'
     bridge_ip: 192.170.3.1
     bridge_netmask: 255.255.255.0
@@ -175,7 +175,7 @@ djp03:
     - mac: '52:54:00:00:03:0A'
       ip: 192.170.3.10
   bridge_networks:
-  - bridge_name: br1
+  - bridge_name: br0
     netmask: 255.255.0.0
     addr_pool:
     - mac: '52:54:00:01:03:02'
@@ -196,7 +196,7 @@ djp03:
       ip: 192.171.3.9
     - mac: '52:54:00:01:03:0A'
       ip: 192.171.3.10
-  - bridge_name: br2
+  - bridge_name: br0
     netmask: 255.255.0.0
     addr_pool:
     - mac: '52:54:00:02:03:02'
