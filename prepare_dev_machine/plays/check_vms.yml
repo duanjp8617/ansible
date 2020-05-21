@@ -1,0 +1,9 @@
+---
+- hosts: dellservers
+
+  roles:
+  - role: roles/load_vars
+  - role: roles/vms/check
+    vars:
+      networks: "{{ network_param[inventory_hostname] }}"
+      vms: "{{ vm_param[inventory_hostname] }}"
