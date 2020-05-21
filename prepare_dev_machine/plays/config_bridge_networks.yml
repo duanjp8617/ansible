@@ -1,4 +1,7 @@
-# Configure the bridge interface on each VMs.
+# Configure the bridge interfaces on each VMs.
+# Then configure a host interface to communicate with the VMs.
+
+# Note: this playbook can only be executed once.
 
 ---
 - hosts: dellservers
@@ -9,3 +12,32 @@
     vars:
       networks: "{{ network_param[inventory_hostname] }}"
       vms: "{{ vm_param[inventory_hostname] }}"
+
+- hosts: djp01
+  vars:
+    bport: bport
+    hport: hport
+    br: br0
+    hport_ip: 192.171.1.1
+    hport_netmask: 255.255.0.0
+
+  tasks:
+  - name: Set up a veth pair.
+    become: yes
+    command: "ip link add {{ bport }} type veth peer name {{ hport }}"
+
+  - name: Attach the bport to br0.
+    become: yes
+    command: "ip link set dev {{ bport }} master {{ br }}"
+
+  - name: Assign IP address to hport
+    become: yes
+    command: "ip a add {{ hport_ip }}/{{ hport_netmask }} dev {{ hport }}"
+
+  - name: Up hport.
+    become: yes
+    command: "ip link set dev {{ hport }} up"
+  
+  - name: Up bport.
+    become: yes
+    command: "ip link set dev {{ bport }} up"
