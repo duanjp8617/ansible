@@ -15,6 +15,11 @@ This folder contains ansible plays for provisioning a small VM cluster.
 5. config_bridge_networks.yml (with sudo priviledge)
 6. upload_vm_hosts.yml
 
+## Using the VMs
+Log into the target machine of upload_vm_hosts.yml play, copy the work_space_dir/vm_hosts file to /etc/ansible/hosts, then use the following command to test the availability of the VMs:
+
+ansible vms -m ping
+
 ## Clean out VMs and networks:
 1. delete_vms.yml
 2. delete_nat_network.yml
