@@ -1,5 +1,7 @@
 # Delete the nat network from the target machine.
 
+# Then delete the veth pair created when configuring the bridge networks.
+
 ---
 - hosts: dellservers
   remote_user: djp
