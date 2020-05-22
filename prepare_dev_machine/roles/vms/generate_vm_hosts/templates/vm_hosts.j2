@@ -1,0 +1,11 @@
+[vms]
+{% for host in groups[group_name] %}
+{% for vm in vms[host] %}
+{{ (networks[host].bridge_networks[0].addr_pool[vm.network_idx].ip)|string }}
+{% endfor %}
+{% endfor %}
+
+
+[vms:vars]
+ansible_user=ubuntu
+ansible_password=ubuntu

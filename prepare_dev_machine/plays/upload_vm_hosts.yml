@@ -1,0 +1,10 @@
+---
+- hosts: djp01
+
+  roles:
+  - role: roles/load_vars
+  - role: roles/vms/generate_vm_hosts
+    vars:
+      networks: "{{ network_param }}"
+      vms: "{{ vm_param }}"
+      group_name: "dellservers"

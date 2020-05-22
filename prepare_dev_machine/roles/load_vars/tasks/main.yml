@@ -11,5 +11,5 @@
     name: network_param
 - name: Include VM parameters.
   include_vars: 
-    file: vm_param1.yml
+    file: vm_param.yml
     name: vm_param

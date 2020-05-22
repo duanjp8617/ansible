@@ -1,0 +1,9 @@
+---
+
+- debug:
+    var: groups[group_name]
+
+- name: Upload VM host file to a target machine.
+  template:
+    src: vm_hosts.j2
+    dest: "{{ work_space_dir }}/vm_hosts"
