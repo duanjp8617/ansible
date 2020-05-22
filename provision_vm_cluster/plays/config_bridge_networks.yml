@@ -25,15 +25,20 @@
   tasks:
   - name: Set up a veth pair.
     command: "ip link add {{ bport }} type veth peer name {{ hport }}"
+    when: no_veth_pair is not defined
 
   - name: Attach the bport to br0.
     command: "ip link set dev {{ bport }} master {{ br }}"
+    when: no_veth_pair is not defined
 
   - name: Assign IP address to hport
     command: "ip a add {{ hport_ip }}/{{ hport_netmask }} dev {{ hport }}"
+    when: no_veth_pair is not defined
 
   - name: Up hport.
     command: "ip link set dev {{ hport }} up"
+    when: no_veth_pair is not defined
   
   - name: Up bport.
     command: "ip link set dev {{ bport }} up"
+    when: no_veth_pair is not defined
