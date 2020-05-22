@@ -8,7 +8,7 @@ This folder contains ansible plays for provisioning a small VM cluster.
 3. According to your hardware settings, modify the parameters in roles/load_vars, plays/config_bridge_networks.yml and plays/upload_my_hosts.yml
 
 ## Provision steps:
-1. become_hypervisor.yml
+1. become_hypervisor.yml (with sudo priviledge)
 2. create_nat_network.yml
 3. create_vms.yml
 4. check_bootup.yml
