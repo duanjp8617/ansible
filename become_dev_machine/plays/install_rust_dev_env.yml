@@ -1,6 +1,7 @@
 ---
-- hosts: 192.171.1.2
+- hosts: djp01
   
   roles:
   - role: roles/load_vars
   - role: roles/rust_dev_env
+    

@@ -9,7 +9,7 @@
   apt:
     name:
     - curl
-    - gcc
+    #- gcc
     state: present
 
 - name: "Install rust"
