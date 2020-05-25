@@ -1,0 +1,16 @@
+---
+- name: Update apt cache.
+  become: yes
+  apt:
+    update_cache: yes
+
+- name: Install curl and gcc.
+  become: yes
+  apt:
+    name:
+    - curl
+    - gcc
+    state: present
+
+- name: "Install rust"
+  shell: "curl https://sh.rustup.rs -sSf | sh -s -- -y"

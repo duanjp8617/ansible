@@ -1,0 +1,3 @@
+---
+- name: Load variables for rust_dev_env role.
+  include_vars: rust_dev_env.yml

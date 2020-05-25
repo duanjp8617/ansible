@@ -1,0 +1,6 @@
+vars:
+
+rust_version: 1.41.0
+cargo_bin_path: "{{ ansible_env.HOME }}/.cargo/bin/cargo"
+rustc_bin_path: "{{ ansible_env.HOME }}/.cargo/bin/rustc"
+rustup_bin_path: "{{ ansible_env.HOME }}/.cargo/bin/rustc"
