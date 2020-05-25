@@ -34,57 +34,9 @@
     repo: "{{ remote_repo }}"
     dest: "{{ local_repo }}"
 
-#- name: Update apt cache.
-#  become: yes
-#  apt:
-#    update_cache: yes
-
-#- name: Install curl and gcc.
-#  become:
-#  apt:
-#    name:
-#    - curl
-#    - gcc
-#    state: present
-
-# - name: Detect Rust environment.
-#   command: "/home/djp/.cargo/bin/rustc"
-#   register: res
-
-# - debug:
-#     var: cargo_bin
-
-# - debug:
-#     var: rustc_bin
-
-# - name: fuck
-#   shell: "which apt"
-#   register: res1
-
-# - name: fuck1
-#   shell: "cargo"
-#   ignore_errors: true
-#   register: res2
-
-# - debug:
-#     var: res1
-
-# - debug:
-#     var: res2
-
-# - name: wtf
-#   set_fact:
-#     fubarhouse_user_dir: "{{ ansible_env.HOME }}"
-
-# - name: "Rust | Define shell exports"
-#   set_fact:
-#     shell_exports:
-#       - regex: 'export PATH="\$PATH:{{ fubarhouse_user_dir }}/.cargo/bin"'
-#         lineinfile: 'export PATH="$PATH:{{ fubarhouse_user_dir }}/.cargo/bin"'
-#   when: shell_exports is not defined
-
-# - debug:
-#     var: shell_exports
-
-# - debug:
-#     var: shell_profiles
+- name: Install docker.io
+  become: yes
+  apt:
+    name:
+    - docker.io
+    state: present
