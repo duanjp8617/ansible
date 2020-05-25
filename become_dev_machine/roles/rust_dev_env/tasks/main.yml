@@ -24,6 +24,16 @@
 - name: Install RLS
   shell: "{{ rustup_bin_path }} component add rls rust-analysis rust-src"
 
+- name: Install cargo crates
+  shell: "{{ cargo_bin_path }} install {{ item.crate }}"
+  with_items: "{{ cargo_crates }}"
+  when: cargo_crates is defined
+
+- name: Checkout the development repository.
+  git:
+    repo: "{{ remote_repo }}"
+    dest: "{{ local_repo }}"
+
 #- name: Update apt cache.
 #  become: yes
 #  apt:

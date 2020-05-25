@@ -9,6 +9,7 @@
   apt:
     name:
     - curl
+    - git
     #- gcc
     state: present
 

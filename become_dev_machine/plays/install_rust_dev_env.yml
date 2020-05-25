@@ -4,4 +4,3 @@
   roles:
   - role: roles/load_vars
   - role: roles/rust_dev_env
-    
