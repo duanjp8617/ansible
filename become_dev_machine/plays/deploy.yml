@@ -1,0 +1,19 @@
+---
+- hosts: self master 192.171.1.3
+
+  tasks:
+
+  - name: Pinging!
+    ping:
+
+- hosts: self
+  
+  roles:
+  - role: roles/load_vars
+
+  tasks:
+  
+  - name: "cargo build local_repo"
+    shell: "{{ cargo_bin_path }} build --manifest-path {{ local_repo }}/Cargo.toml"
+
+  - name: 

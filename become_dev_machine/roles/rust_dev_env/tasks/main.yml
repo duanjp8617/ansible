@@ -37,9 +37,13 @@
     repo: "{{ remote_repo }}"
     dest: "{{ local_repo }}"
 
-- name: Install docker.io
+- name: Install docker.io and pip3
   become: yes
   apt:
     name:
     - docker.io
+    - python3-pip
     state: present
+
+- name: Install docker-py
+  shell: "pip3 install docker-py"
