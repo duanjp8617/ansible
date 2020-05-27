@@ -18,6 +18,9 @@
   include_tasks: install_rust.yml
   when: rustup_present.stat.exists != true or cargo_present.stat.exists != true or rustc_present.stat.exists != true
 
+#- name: Switch to nightly if needed
+#  shell: "{{ rustup_bin_path }} default nightly"
+
 - name: Update rustup
   shell: "{{ rustup_bin_path }} update"
 

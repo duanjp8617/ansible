@@ -10,7 +10,6 @@
     name:
     - curl
     - git
-    #- gcc
     state: present
 
 - name: "Install rust"

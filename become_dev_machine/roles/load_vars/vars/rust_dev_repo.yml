@@ -1,3 +1,0 @@
-vars:
-remote_repo: "https://github.com/duanjp8617/mocknet-rust.git"
-local_repo: "{{ ansible_env.HOME }}/mocknet-rust"

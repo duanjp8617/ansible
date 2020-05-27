@@ -4,6 +4,3 @@
 
 - name: Load cargo packages for installation.
   include_vars: cargo_crates.yml
-
-- name: Load git repo.
-  include_vars: rust_dev_repo.yml
