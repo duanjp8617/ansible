@@ -2,7 +2,6 @@
 - hosts: self master 192.171.1.3
 
   tasks:
-
   - name: Pinging!
     ping:
 
@@ -12,8 +11,54 @@
   - role: roles/load_vars
 
   tasks:
-  
   - name: "cargo build local_repo"
     shell: "{{ cargo_bin_path }} build --manifest-path {{ local_repo }}/Cargo.toml"
 
-  - name: 
+- hosts: master
+
+  tasks:
+  - name: Create a working directory
+    file:
+      path: "/home/ubuntu/master"
+      state: directory
+  
+  - name: Upload dockerfile to working directory
+    copy:
+      src: "/home/djp/mocknet-rust/dockerfiles/master"
+      dest: "/home/ubuntu/master/Dockerfile"
+    
+  - name: Upload executable to working directory
+    copy:
+      src: "/home/djp/mocknet-rust/target/debug/mocknet-master"
+      dest: "/home/ubuntu/master/mocknet-master"
+
+  - name: "Make mocknet-masetr executable"
+    file:
+      path: "/home/ubuntu/master/mocknet-master"
+      mode: 0755
+
+  - name: Create a log directory
+    file:
+      path: "/home/ubuntu/log"
+      state: directory
+
+  - name: Create a log file
+    file:
+      path: "/home/ubuntu/log/log.txt"
+      state: touch
+
+  # - name: "Stop all running containers"
+  #   become: yes
+  #   shell: "docker stop $(docker ps -aq)"
+
+  # - name: "Remove all running containers"
+  #   become: yes
+  #   shell: "docker rm $(docker ps -aq)"
+
+  - name: "Build up the docker image"
+    become: yes
+    shell: "docker build -t mocknet-master:latest -f /home/ubuntu/master/Dockerfile /home/ubuntu/master"
+
+  - name: "Launch the master container"
+    become: yes
+    shell: "docker run -idt --network host -v /home/ubuntu/log:/usr/src/mocknet-master/log --name master mocknet-master"
