@@ -1,20 +1,25 @@
+# Turn the target machine into a dev machine by installing
+# Rust toolchain and docker.
+
+# The dev machine should be connected to the same management 
+# network of the VM cluster.
 ---
-- name: Check rustc exists.
+- name: Check rustc.
   stat:
     path: "{{ rustc_bin_path }}"
   register: rustc_present
 
-- name: Check cargo exists.
+- name: Check cargo.
   stat:
     path: "{{ cargo_bin_path }}"
   register: cargo_present
 
-- name: Check rustup exists.
+- name: Check rustup.
   stat:
     path: "{{ rustup_bin_path }}"
   register: rustup_present
 
-- name: Install Rust binaries.
+- name: Install Rust toolchain.
   include_tasks: install_rust.yml
   when: rustup_present.stat.exists != true or cargo_present.stat.exists != true or rustc_present.stat.exists != true
 
@@ -27,23 +32,29 @@
 - name: Install RLS
   shell: "{{ rustup_bin_path }} component add rls rust-analysis rust-src"
 
-- name: Install cargo crates
+- name: Install necessary cargo crates
   shell: "{{ cargo_bin_path }} install {{ item.crate }}"
   with_items: "{{ cargo_crates }}"
   when: cargo_crates is defined
+
+- name: Install docker
+  become: yes
+  apt:
+    name:
+    - docker.io
+    state: present
+
+# - name: Install pip3
+#   become: yes
+#   apt:
+#     name:
+#     - python3-pip
+#     state: present
+
+# - name: Install docker-py
+#   shell: "pip3 install docker-py"
 
 - name: Checkout the development repository.
   git:
     repo: "{{ remote_repo }}"
     dest: "{{ local_repo }}"
-
-- name: Install docker.io and pip3
-  become: yes
-  apt:
-    name:
-    - docker.io
-    - python3-pip
-    state: present
-
-- name: Install docker-py
-  shell: "pip3 install docker-py"

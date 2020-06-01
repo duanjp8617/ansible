@@ -1,10 +1,11 @@
+# Tasks for installing Rust toolchain.
 ---
 - name: Update apt cache.
   become: yes
   apt:
     update_cache: yes
 
-- name: Install curl and gcc.
+- name: Install curl and git.
   become: yes
   apt:
     name:
