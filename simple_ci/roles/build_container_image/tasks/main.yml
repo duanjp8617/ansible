@@ -1,4 +1,0 @@
----
-- name: "Build up the docker image"
-  become: yes
-  shell: "docker build -t {{ container_image_name }}:latest -f {{ ansible_env.HOME }}/{{ work_dir_name }}/Dockerfile {{ ansible_env.HOME }}/{{ work_dir_name }}"

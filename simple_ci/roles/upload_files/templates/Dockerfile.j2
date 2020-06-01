@@ -1,9 +1,0 @@
-FROM {{ base_docker_image }}
-
-WORKDIR /usr/src/{{ work_dir_name }}
-
-COPY . .
-
-RUN mkdir -p /usr/src/{{ log_dir_name }}
-
-CMD exec ./{{ bin_name }} > /usr/src/{{ log_dir_name }}/{{ log_name }} 2>&1

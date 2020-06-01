@@ -1,0 +1,12 @@
+---
+- hosts: master slaves
+  become: yes
+
+  tasks:
+  - name: Kill containers.
+    shell: "docker kill $(docker ps -q)"
+    ignore_errors: yes
+
+  - name: Remove containers.
+    shell: "docker rm $(docker ps -a -q)"
+    ignore_errors: yes

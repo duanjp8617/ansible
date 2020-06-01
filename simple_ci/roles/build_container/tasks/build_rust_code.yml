@@ -1,3 +1,0 @@
----
-- name: Build Rust source code.
-  shell: "{{ cargo_bin_path }} build --manifest-path {{ rust_source }}/Cargo.toml"
