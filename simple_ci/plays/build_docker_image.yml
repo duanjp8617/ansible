@@ -1,0 +1,32 @@
+---
+- hosts: self
+
+  roles:
+  - role: roles/load_vars
+  - role: roles/build_rust_code
+    vars:
+      cargo_bin_path: "{{ ansible_env.HOME }}/.cargo/bin/cargo"
+      rust_source: "{{ ansible_env.HOME }}/mocknet-rust"
+
+- hosts: master
+
+  roles:
+  - role: roles/upload_files
+    vars:
+      base_docker_image: "ubuntu"
+      work_dir_name: "mocknet-master"
+      log_dir_name: "mocknet-master-log"
+      bin_name: "mocknet-master"
+      log_name: "mocknet-master.log"
+      local_path_to_bin: "/home/djp/mocknet-rust/target/debug/mocknet-master"
+  
+  - role: roles/build_container_image
+    vars:
+      work_dir_name: "mocknet-master"
+      container_image_name: "mocknet-master"
+
+  - role: roles/launch_container
+    vars:
+      log_dir_name: "mocknet-master"
+      container_name: "master"
+      container_image_name: "mocknet-master"

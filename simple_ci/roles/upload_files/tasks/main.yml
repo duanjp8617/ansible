@@ -1,0 +1,31 @@
+---
+- name: Create a log directory
+  file:
+    path: "{{ ansible_env.HOME }}/{{ log_dir_name }}"
+    state: directory
+
+- name: Create a log file
+  file:
+    path: "{{ ansible_env.HOME }}/{{ log_dir_name }}/{{ log_name }}"
+    state: touch
+
+- name: Create a work directory
+  file:
+    path: "{{ ansible_env.HOME }}/{{ work_dir_name }}"
+    state: directory
+
+- name: Upload dockerfile to working directory
+  template:
+    src: Dockerfile.j2
+    dest: "{{ ansible_env.HOME }}/{{ work_dir_name }}/Dockerfile"
+
+- name: Upload executable file to working directory
+  copy:
+    src: "{{ local_path_to_bin }}"
+    dest: "{{ ansible_env.HOME }}/{{ work_dir_name }}/{{ bin_name }}"
+
+- name: "Make the uploaded file executable"
+  file:
+    path: "{{ ansible_env.HOME }}/{{ work_dir_name }}/{{ bin_name }}"
+    mode: 0755
+

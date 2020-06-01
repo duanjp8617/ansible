@@ -11,8 +11,8 @@
     apt:
       name:
       - docker.io
-      - python3-pip
+      # - python3-pip
       state: present
 
-  - name: Install docker-py
-    shell: "pip3 install docker-py"
+  # - name: Install docker-py
+  #   shell: "pip3 install docker-py"

@@ -1,0 +1,4 @@
+---
+- name: Launch the container
+  become: yes
+  shell: "docker run -idt --network host --name {{ container_name }} {{ container_image_name }}"

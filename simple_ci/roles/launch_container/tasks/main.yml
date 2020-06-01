@@ -1,0 +1,4 @@
+---
+- name: Launch the container
+  become: yes
+  shell: "docker run -idt --network host -v {{ ansible_env.HOME }}/{{ log_dir_name }}:/usr/src/{{ log_dir_name }} --name {{ container_name }} {{ container_image_name }}"

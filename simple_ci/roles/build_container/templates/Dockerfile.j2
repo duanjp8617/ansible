@@ -1,0 +1,9 @@
+FROM {{ base_docker_image }}
+
+WORKDIR /usr/src/{{ work_dir_name }}
+
+COPY . .
+
+CMD touch ./{{ log_file_name }}
+
+CMD exec ./{{ bin_file_name }} > ./{{ log_file_name }} 2>&1
