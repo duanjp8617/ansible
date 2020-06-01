@@ -2,8 +2,8 @@ This folder contains ansible plays for provisioning a small VM cluster.
 
 ## Before using these plays:
 1. Make sure that you have several available servers.
-2. In an ideal scenario, the servers should be connected to two separate LAN networks. Each server should have one dedicated network interface that provides Internet connection.
-3. Follow the intrustions from the BridgeNetwork section of my personal emacs-config repo, and connect the LAN network interfaces two bridges.
+2. In an ideal scenario, the servers should be connected to two separate LAN networks. Each server should have one additional network interface that is dedicated to Internet connectivity.
+3. Follow the intrustions from the BridgeNetwork section of my personal emacs-config repo, create two bridge interfaces, and connect the bridge interfaces to the physical network interfaces that are attached to the LAN network. 
 4. Following the intstructions from the QuickVM section of my personal emacs-config repo, and create a base VM image.
 3. According to your hardware settings, modify the parameters in roles/load_vars, plays/config_bridge_networks.yml and plays/upload_my_hosts.yml
 
