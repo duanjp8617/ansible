@@ -10,25 +10,29 @@
 - hosts: master
 
   roles:
+  - role: roles/load_vars
   - role: roles/build_container
     vars:
-      base_docker_image: "ubuntu"
-      work_dir_name: "mocknet-master"
-      bin_file_name: "mocknet-master"
-      log_file_name: "mocknet-master.log"
-      local_path_to_bin: "/home/djp/mocknet-rust/target/debug/mocknet-master"
-      container_name: "master"
-      container_image_name: "mocknet-master"
+      base_docker_image: "{{ master.base_docker_image }}"
+      work_dir_name: "{{ master.work_dir_name }}"
+      bin_file_name: "{{ master.bin_file_name }}"
+      log_file_name: "{{ master.log_file_name }}"
+      local_path_to_bin: "{{ master.local_path_to_bin }}"
+      container_name: "{{ master.container_name }}"
+      container_image_name: "{{ master.container_image_name }}"
+      container_work_dir_prefix: "{{ master.container_work_dir_prefix }}"
 
 - hosts: slaves
 
   roles:
+  - role: roles/load_vars
   - role: roles/build_container
     vars:
-      base_docker_image: "ubuntu"
-      work_dir_name: "mocknet-slave"
-      bin_file_name: "mocknet-slave"
-      log_file_name: "mocknet-slave.log"
-      local_path_to_bin: "/home/djp/mocknet-rust/target/debug/mocknet-slave"
-      container_name: "slave"
-      container_image_name: "mocknet-slave"
+      base_docker_image: "{{ slave.base_docker_image }}"
+      work_dir_name: "{{ slave.work_dir_name }}"
+      bin_file_name: "{{ slave.bin_file_name }}"
+      log_file_name: "{{ slave.log_file_name }}"
+      local_path_to_bin: "{{ slave.local_path_to_bin }}"
+      container_name: "{{ slave.container_name }}"
+      container_image_name: "{{ slave.container_image_name }}"
+      container_work_dir_prefix: "{{ slave.container_work_dir_prefix }}"

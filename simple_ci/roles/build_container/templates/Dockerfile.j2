@@ -1,6 +1,6 @@
 FROM {{ base_docker_image }}
 
-WORKDIR /usr/src/{{ work_dir_name }}
+WORKDIR {{ container_work_dir_prefix }}/{{ work_dir_name }}
 
 COPY . .
 

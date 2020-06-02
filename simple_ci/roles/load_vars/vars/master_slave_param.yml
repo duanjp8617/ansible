@@ -1,0 +1,40 @@
+vars:
+
+master:
+  # Base image for building the container running master program
+  base_docker_image: "ubuntu"
+
+  # Workspace directory name of both the container and the target machine.
+  work_dir_name: "mocknet-master"
+
+  # Executable file name to run in the container.
+  bin_file_name: "mocknet-master"
+
+  # Log file name which logs all the std output from the executable file.
+  log_file_name: "mocknet-master.log"
+
+  # Path to the executable file on the local machine.
+  local_path_to_bin: "/home/djp/mocknet-rust/target/debug/mocknet-master"
+
+  # Name of the container to launch
+  container_name: "master"
+
+  # Name of the container image
+  container_image_name: "mocknet-master"
+
+  # Path prefix of the workspace in the container
+  container_work_dir_prefix: "/usr/src"
+
+  # Local directory for storing master log, must end with a "/"
+  local_log_dir: "/home/djp/logs/"
+
+slave:
+  base_docker_image: "ubuntu"
+  work_dir_name: "mocknet-slave"
+  bin_file_name: "mocknet-slave"
+  log_file_name: "mocknet-slave.log"
+  local_path_to_bin: "/home/djp/mocknet-rust/target/debug/mocknet-slave"
+  container_name: "slave"
+  container_image_name: "mocknet-slave"
+  container_work_dir_prefix: "/usr/src"
+  local_log_dir: "/home/djp/logs/"

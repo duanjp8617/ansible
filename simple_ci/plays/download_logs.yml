@@ -1,0 +1,25 @@
+---
+- hosts: master
+  
+  roles:
+  - role: roles/load_vars
+  - role: roles/download_logs
+    vars:
+      work_dir_name: "{{ master.work_dir_name }}"
+      log_file_name: "{{ master.log_file_name }}"
+      container_name: "{{ master.container_name }}"
+      container_work_dir_prefix: "{{ master.container_work_dir_prefix }}"
+      local_log_dir: "{{ master.local_log_dir }}" 
+
+
+- hosts: slaves
+ 
+  roles:
+  - role: roles/load_vars
+  - role: roles/download_logs
+    vars:
+      work_dir_name: "{{ slave.work_dir_name }}"
+      log_file_name: "{{ slave.log_file_name }}"
+      container_name: "{{ slave.container_name }}"
+      container_work_dir_prefix: "{{ slave.container_work_dir_prefix }}"
+      local_log_dir: "{{ master.local_log_dir }}" 

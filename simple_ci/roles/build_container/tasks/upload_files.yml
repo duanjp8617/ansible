@@ -18,3 +18,8 @@
   file:
     path: "{{ ansible_env.HOME }}/{{ work_dir_name }}/{{ bin_file_name }}"
     mode: 0755
+
+# - name: "Create a log file"
+#   file:
+#     path: "{{ ansible_env.HOME }}/{{ work_dir_name }}/{{ log_file_name }}"
+#     state: touch

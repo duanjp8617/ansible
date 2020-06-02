@@ -1,2 +1,2 @@
 ---
-- include_vars: fuck.yml
+- include_vars: master_slave_param.yml

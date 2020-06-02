@@ -1,0 +1,4 @@
+---
+- name: Launch the container
+  become: yes
+  shell: "docker run -idt --network host -v {{ ansible_env.HOME }}/{{ work_dir_name }}:{{ container_work_dir_prefix }}/{{ work_dir_name }} --name {{ container_name }} {{ base_docker_image }} {{ container_work_dir_prefix }}/{{ work_dir_name }}/{{ bin_file_name }} > {{ container_work_dir_prefix }}/{{ work_dir_name }}/{{ log_file_name }} 2>&1"

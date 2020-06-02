@@ -1,0 +1,10 @@
+---
+- name: Copy container log.
+  become: yes
+  shell: "docker cp {{ container_name }}:{{ container_work_dir_prefix }}/{{ work_dir_name }}/{{ log_file_name }} {{ ansible_env.HOME }}/{{ work_dir_name }}/{{ container_name }}_{{ inventory_hostname }}.log"
+
+- name: Fetch container log.
+  fetch:
+    src: "{{ ansible_env.HOME }}/{{ work_dir_name }}/{{ container_name }}_{{ inventory_hostname }}.log"
+    dest: "{{ local_log_dir }}"
+    flat: yes
