@@ -7,5 +7,5 @@ This folder contains an ansible play for turning the target machine into a devel
 
 ## Using the dev machine.
 1. Open vscode and use remote ssh extention to connect to the dev machine.
-2. Install vscode rust extention, and set the "rustupPath" field to the value of "rustup_bin_path" variable from the load_vars role.
+2. Install vscode rust extention, and set the "rustupPath" field to the value of "rustup_bin_path" variable from the load_vars role. Set "rust.unstable_features" to true with the following line: "rust.unstable_features : true".
 3. You can begin the development process using the plays contained in simple_ci.
