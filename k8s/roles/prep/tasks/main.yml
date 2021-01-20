@@ -1,0 +1,11 @@
+- name: Disable swap temporarily.
+  become: yes
+  shell: "swapoff -a"
+
+- name: Disable swap permanently.
+  become: yes
+  replace: 
+    dest: /home/ubuntu/fstab
+    backup: yes
+    regexp: '^((.*)swap(.*)$)'
+    replace: '# \1'
