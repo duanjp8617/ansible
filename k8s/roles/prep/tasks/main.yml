@@ -2,10 +2,30 @@
   become: yes
   shell: "swapoff -a"
 
+# comment out the line containing swap 
 - name: Disable swap permanently.
   become: yes
   replace: 
-    dest: /home/ubuntu/fstab
+    dest: /etc/fstab
     backup: yes
     regexp: '^((.*)swap(.*)$)'
     replace: '# \1'
+
+# please set up the hostnames accordlingly in hostnames.yml
+- name: Load hostnames.
+  include_vars: 
+    file: hostnames.yml
+    name: hostnames
+
+- name: Update hostname.
+  become: yes
+  replace:
+    dest: /etc/hostname
+    regexp: '^(.+)'
+    replace: "{{ hostnames[inventory_hostname].hostname }}"
+
+- name: Update available hosts.
+  become: yes
+  template:
+    src: hosts.j2
+    dest: "/etc/hosts"

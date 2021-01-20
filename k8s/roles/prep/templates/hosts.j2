@@ -1,0 +1,3 @@
+{% for key in hostnames.keys() %}
+{{ (hostnames[key].ip)|string }} {{ (hostnames[key].hostname)|string }}
+{% endfor %}
