@@ -1,0 +1,49 @@
+# install docker, currently I'm using docker to manage everything, for simplicity
+- name: Install docker.
+  become: yes
+  apt:
+    name: docker.io
+    update_cache: yes
+
+# install apt-transport-https
+- name: Install apt-transport-https.
+  become: yes
+  apt:
+    name: apt-transport-https
+  
+# download alicloud apt-key
+- name: Download alicloud apt-key.
+  get_url:
+    url: https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg
+    dest: "{{ ansible_env.HOME }}/apt-key.gpg"
+
+# add apt-key
+- name: Add apt-key.
+  become: yes
+  shell: "apt-key add {{ ansible_env.HOME }}/apt-key.gpg"
+
+# add alicloud source list to apt
+- name: Add alicloud source list.
+  become: yes
+  apt_repository:
+    repo: deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main
+    state: present
+
+# install kubelet
+- name: Install kubelet.
+  become: yes
+  apt:
+    name: kubelet
+    update_cache: yes
+
+# install kubectl
+- name: Install kubectl.
+  become: yes
+  apt:
+    name: kubectl
+  
+# install kubeadm
+- name: Install kubeadm.
+  become: yes
+  apt:
+    name: kubeadm
