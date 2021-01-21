@@ -25,6 +25,11 @@
     regexp: '^(.+)'
     replace: "{{ hostnames[inventory_hostname].hostname }}"
 
+# restart hostname service
+- name: Manually set hostname
+  become: yes
+  shell: "hostnamectl set-hostname {{ hostnames[inventory_hostname].hostname }}"
+
 # change the available hosts on each machine
 - name: Update available hosts.
   become: yes
