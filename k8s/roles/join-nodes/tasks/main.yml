@@ -1,0 +1,3 @@
+- name: Join master.
+  become: yes
+  shell: "{{ join_cmd }}"

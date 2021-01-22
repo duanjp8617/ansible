@@ -1,0 +1,15 @@
+---
+- hosts: master
+  roles:
+  - role: roles/join-cmd
+
+  tasks:
+  - name: Print join command.
+    debug:
+      msg: "{{ join_cmd }}"
+
+- hosts: nodes
+  roles:
+  - role: roles/join-nodes
+    vars:
+      join_cmd: "{{ hostvars[groups['master'][0]]['join_cmd'] }}"

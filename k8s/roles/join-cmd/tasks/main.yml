@@ -1,0 +1,13 @@
+- name: Generate k8s token.
+  become: yes
+  shell: "kubeadm token generate"
+  register: token
+
+- name: Token create.
+  become: yes
+  shell: "kubeadm token create {{ token.stdout }} --print-join-command"
+  register: token_create
+
+- name: Set join command.
+  set_fact:
+    join_cmd: "{{ token_create.stdout }}"

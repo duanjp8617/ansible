@@ -1,0 +1,14 @@
+[master]
+192.171.1.2
+
+[nodes]
+192.171.1.3
+192.171.1.4
+
+[master:vars]
+ansible_user=ubuntu
+ansible_password=ubuntu
+
+[nodes:vars]
+ansible_user=ubuntu
+ansible_password=ubuntu
