@@ -1,0 +1,8 @@
+---
+- hosts: master
+  roles:
+  - role: roles/init-master
+    vars:
+      # APISERVER_ADDR should be properly set.
+      # here, I'm assuming that the inventory_hostname is a valid IP address
+      APISERVER_ADDR:  "{{ inventory_hostname }}"

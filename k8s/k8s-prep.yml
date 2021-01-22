@@ -1,5 +1,4 @@
 ---
-- hosts: vms
-
+- hosts: all
   roles:
   - role: roles/prep

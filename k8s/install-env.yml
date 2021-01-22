@@ -1,5 +1,10 @@
----
-- hosts: vms
+# https://cloud.tencent.com/developer/article/1509412
+# if unattended-upgrader is holding the lock, then manually disable it with
+# sudo dpkg-reconfigure unattended-upgrades
+# Then manually kill the unattended-upgrades with
+# ps -aux | grep unatte* && sudo kill -9 'PID'
 
+---
+- hosts: all
   roles:
   - role: roles/install

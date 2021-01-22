@@ -11,31 +11,32 @@
     regexp: '^((.*)swap(.*)$)'
     replace: '# \1'
 
-# please set up the hostnames accordlingly in hostnames.yml
-- name: Load hostnames.
-  include_vars: 
-    file: hostnames.yml
-    name: hostnames
+## Note: It is not necessary to set the hostname on both master and worker nodes.    
+# # please set up the hostnames accordlingly in hostnames.yml
+# - name: Load hostnames.
+#   include_vars: 
+#     file: hostnames.yml
+#     name: hostnames
 
-# update the hostname
-- name: Update hostname.
-  become: yes
-  replace:
-    dest: /etc/hostname
-    regexp: '^(.+)'
-    replace: "{{ hostnames[inventory_hostname].hostname }}"
+# # update the hostname
+# - name: Update hostname.
+#   become: yes
+#   replace:
+#     dest: /etc/hostname
+#     regexp: '^(.+)'
+#     replace: "{{ hostnames[inventory_hostname].hostname }}"
 
-# restart hostname service
-- name: Manually set hostname
-  become: yes
-  shell: "hostnamectl set-hostname {{ hostnames[inventory_hostname].hostname }}"
+# # restart hostname service
+# - name: Manually set hostname
+#   become: yes
+#   shell: "hostnamectl set-hostname {{ hostnames[inventory_hostname].hostname }}"
 
-# change the available hosts on each machine
-- name: Update available hosts.
-  become: yes
-  template:
-    src: hosts.j2
-    dest: "/etc/hosts"
+# # change the available hosts on each machine
+# - name: Update available hosts.
+#   become: yes
+#   template:
+#     src: hosts.j2
+#     dest: "/etc/hosts"
 
 # load the br_netfilter kernel module
 - name: Load br_netfilter kmod.

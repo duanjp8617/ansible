@@ -1,0 +1,13 @@
+[master]
+master.k8s
+
+[nodes]
+node[1-2].k8s
+
+[master:vars]
+ansible_user=ubuntu
+ansible_password=ubuntu
+
+[nodes:vars]
+ansible_user=ubuntu
+ansible_password=ubuntu

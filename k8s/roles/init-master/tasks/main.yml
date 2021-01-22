@@ -1,0 +1,31 @@
+- name: Init k8s master.
+  become: yes
+  shell: "kubeadm init \
+  --apiserver-advertise-address={{ APISERVER_ADDR }} --image-repository registry.aliyuncs.com/google_containers \
+  --service-cidr=10.1.0.0/16 \
+  --pod-network-cidr=10.244.0.0/16"
+  
+- name: Post initialization step 1.
+  file:
+    path: "{{ ansible_env.HOME }}/.kube"
+    state: directory
+    mode: '0755'
+
+- name: Post initialization step 2.
+  become: yes
+  shell: "cp -i /etc/kubernetes/admin.conf {{ ansible_env.HOME }}/.kube/config"
+
+- name: Get user.
+  shell: "id -u"
+  register: id_u
+
+- name: Get group.
+  shell: "id -g"
+  register: id_g
+
+- name: Post initialization step 3.
+  become: yes
+  file:
+    path: "{{ ansible_env.HOME }}/.kube/config"
+    owner: "{{ id_u.stdout }}"
+    group: "{{ id_g.stdout }}"
